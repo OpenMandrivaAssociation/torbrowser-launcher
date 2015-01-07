@@ -13,16 +13,16 @@ License:	MIT
 Group:		Networking/WWW
 BuildArch:	noarch
 
-BuildRequires: pkgconfig(python)
-BuildRequires: pythonegg(psutil)
-BuildRequires: pythonegg(twisted)
+BuildRequires: python2-devel
+BuildRequires: python2-setuptools
+BuildRequires: python2-psutil
+BuildRequires: python2-twisted
 BuildRequires: wmctrl 
 BuildRequires: gnupg 
 BuildRequires: fakeroot
 
-Requires: pythonegg(psutil)
-Requires: pythonegg(twisted)
-Requires: wmctrl 
+Requires: python2-psutil
+Requires: python2-twisted
 
 %description
 Tor Browser Launcher is intended to make the 
@@ -53,17 +53,17 @@ bookmarks and always be running the latest version.
 %setup -q
 
 %build
-python setup.py build
+python2 setup.py build
 
 %install
-python setup.py install --root=%{buildroot}
+python2 setup.py install --root=%{buildroot}
 
 
 %files 
 %doc LICENSE README.md
 %{_bindir}/%{name}
-%{py_puresitedir}/%{oname}-%{version}-*.egg-info
-%{py_puresitedir}/%{oname}/
+%{py2_puresitedir}/%{oname}-%{version}-*.egg-info
+%{py2_puresitedir}/%{oname}/
 %{_datadir}/appdata/torbrowser.appdata.xml
 %{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/*.xpm
