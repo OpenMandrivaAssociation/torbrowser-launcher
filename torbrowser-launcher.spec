@@ -1,6 +1,6 @@
 %define name torbrowser-launcher
 %define version 0.1.7
-%define release 1
+%define release 2
 %define oname torbrowser_launcher
 
 Summary:	Download,update, and run the Tor Browser Bundle
@@ -23,6 +23,11 @@ BuildRequires: fakeroot
 
 Requires: python2-psutil
 Requires: python2-twisted
+Requires: pythonegg(service-identity)
+Requires: pythonegg(txsocksx)
+Requires: pythonegg(parsley)
+
+
 
 %description
 Tor Browser Launcher is intended to make the 
