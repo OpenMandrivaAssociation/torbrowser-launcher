@@ -23,6 +23,10 @@ BuildRequires: fakeroot
 Requires: pythonegg(psutil)
 Requires: pythonegg(twisted)
 Requires: wmctrl 
+Requires: pythonegg(service-identity)
+Requires: pythonegg(txsocksx)
+Requires: pythonegg(parsley)
+
 
 %description
 Tor Browser Launcher is intended to make the 
