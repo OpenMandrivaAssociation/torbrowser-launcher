@@ -26,6 +26,7 @@ Requires: python2-twisted
 Requires: pythonegg(service-identity)
 Requires: pythonegg(txsocksx)
 Requires: pythonegg(parsley)
+Requires: pythonegg(pyliblzma)
 
 
 
