@@ -1,6 +1,6 @@
 %define name torbrowser-launcher
 %define version 0.1.7
-%define release 1
+%define release 2
 %define oname torbrowser_launcher
 
 Summary:	Download,update, and run the Tor Browser Bundle
@@ -26,6 +26,7 @@ Requires: wmctrl
 Requires: pythonegg(service-identity)
 Requires: pythonegg(txsocksx)
 Requires: pythonegg(parsley)
+Requires: pythonegg(pyliblzma)
 
 
 %description
