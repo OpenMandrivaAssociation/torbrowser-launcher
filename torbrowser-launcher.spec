@@ -1,6 +1,6 @@
 %define name torbrowser-launcher
 %define version 0.1.7
-%define release 2
+%define release 3
 %define oname torbrowser_launcher
 
 Summary:	Download,update, and run the Tor Browser Bundle
