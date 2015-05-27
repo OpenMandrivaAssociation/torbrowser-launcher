@@ -1,6 +1,6 @@
 %define name torbrowser-launcher
-%define version 0.1.7
-%define release 2
+%define version 0.2.0
+%define release 1
 %define oname torbrowser_launcher
 
 Summary:	Download,update, and run the Tor Browser Bundle
@@ -8,7 +8,7 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Url:		https://www.github.com/micahflee/torbrowser-launcher
-Source0:	https://github.com/micahflee/torbrowser-launcher/archive/v0.1.7.tar.gz
+Source0:	https://github.com/micahflee/torbrowser-launcher/archive/v0.2.0.tar.gz
 License:	MIT
 Group:		Networking/WWW
 BuildArch:	noarch
