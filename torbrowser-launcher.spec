@@ -1,5 +1,5 @@
 %define name torbrowser-launcher
-%define version 0.2.0
+%define version 0.2.2
 %define release 1
 %define oname torbrowser_launcher
 
@@ -8,7 +8,7 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Url:		https://www.github.com/micahflee/torbrowser-launcher
-Source0:	https://github.com/micahflee/torbrowser-launcher/archive/v0.2.0.tar.gz
+Source0:	https://github.com/micahflee/torbrowser-launcher/archive/%{name}-%{version}.tar.gz
 License:	MIT
 Group:		Networking/WWW
 BuildArch:	noarch
