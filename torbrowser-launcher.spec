@@ -1,5 +1,5 @@
 %define name torbrowser-launcher
-%define version 0.2.2
+%define version 0.2.4
 %define release 1
 %define oname torbrowser_launcher
 
@@ -72,7 +72,7 @@ python2 setup.py install --root=%{buildroot}
 %{py2_puresitedir}/%{oname}/
 %{_datadir}/appdata/torbrowser.appdata.xml
 %{_datadir}/applications/*.desktop
-%{_datadir}/pixmaps/*.xpm
+%{_datadir}/pixmaps/*.png
 %{_datadir}/%{name}
 %{_sysconfdir}/apparmor.d/*
 
