@@ -1,0 +1,10 @@
+--- torbrowser-launcher-0.2.4/torbrowser_launcher/launcher.py.orig	2016-03-21 22:17:51.582140308 +0000
++++ torbrowser-launcher-0.2.4/torbrowser_launcher/launcher.py	2016-03-21 22:18:01.054139702 +0000
+@@ -30,7 +30,6 @@
+ from twisted.internet import reactor
+ from twisted.web.client import Agent, RedirectAgent, ResponseDone, ResponseFailed
+ from twisted.web.http_headers import Headers
+-from twisted.web.iweb import IPolicyForHTTPS
+ from twisted.internet.protocol import Protocol
+ from twisted.internet.error import DNSLookupError, ConnectionRefusedError
+ 

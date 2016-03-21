@@ -1,5 +1,5 @@
 %define name torbrowser-launcher
-%define version 0.2.2
+%define version 0.2.4
 %define release 1
 %define oname torbrowser_launcher
 
@@ -9,6 +9,7 @@ Version:	%{version}
 Release:	%{release}
 Url:		https://www.github.com/micahflee/torbrowser-launcher
 Source0:	https://github.com/micahflee/torbrowser-launcher/archive/%{name}-%{version}.tar.gz
+Patch1:		torbrowser-launcher-0.2.4-twisted13.patch
 License:	MIT
 Group:		Networking/WWW
 BuildArch:	noarch
@@ -71,7 +72,7 @@ python setup.py install --root=%{buildroot}
 %{py_puresitedir}/%{oname}/
 %{_datadir}/appdata/torbrowser.appdata.xml
 %{_datadir}/applications/*.desktop
-%{_datadir}/pixmaps/*.xpm
+%{_datadir}/pixmaps/*.png
 %{_datadir}/%{name}
 %{_sysconfdir}/apparmor.d/*
 
