@@ -26,7 +26,7 @@ Requires:	python3dist(packaging)
 Requires:	python3dist(requests)
 Requires:	tor
 
-ExclusiveArch: %{ix86} x86_64
+ExclusiveArch: %{ix86} %{x86_64}
 
 %description
 Tor Browser Launcher is intended to make the Tor Browser Bundle (TBB) easier
