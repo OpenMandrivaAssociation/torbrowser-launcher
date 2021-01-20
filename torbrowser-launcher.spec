@@ -14,7 +14,7 @@ Group:		Networking/WWW
 BuildRequires:	desktop-file-utils
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(python3)
-Requires:	python3dist(distro)
+BuildRequires:	python3dist(distro)
 BuildRequires:	%{_lib}appstream-glib8
 	
 Requires:	python3
