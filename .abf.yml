@@ -1,8 +1,2 @@
-removed_sources:
-  torbrowser-launcher-0.3.3.tar.gz: 4d9d0065c42a1eb6c93bf29c434271665e980985
-  torbrowser-launcher-0.2.2.tar.gz: 08dc4fa2fb9d3a67c199fc612e0fbab5799ce32e
-  torbrowser-launcher-0.2.4.tar.gz: 043b7247cae3e9c2fa335f47e6891c6dbb8aa31e
-  v0.1.7.tar.gz: 64b7bf4072dd09039b576e534a855c17f4c4d0ae
 sources:
-  torbrowser-launcher-0.3.5.tar.gz: 26dfd70f6c416bba58869873d9032fc09c279923
-
+  torbrowser-launcher-0.3.6.tar.gz: bd17419991daf8fb485516c8a6a47322673ac8f3
