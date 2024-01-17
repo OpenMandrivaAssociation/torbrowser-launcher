@@ -11,19 +11,12 @@ Source0:	https://github.com/micahflee/%{name}/archive/v%{version}/%{name}-%{vers
 License:	MIT
 Group:		Networking/WWW
 	
-BuildRequires:	desktop-file-utils
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(python3)
-BuildRequires:	python3dist(distro)
+BuildRequires:	python%{pyver}dist(distro)
 BuildRequires:	%{_lib}appstream-glib8
 	
-Requires:	python3
 Requires:	gnupg2
-Requires:	python-qt5
-Requires:	python3dist(gpg)
-Requires:	python3dist(pysocks)
-Requires:	python3dist(packaging)
-Requires:	python3dist(requests)
 Requires:	tor
 
 ExclusiveArch: %{ix86} %{x86_64}
@@ -46,40 +39,26 @@ bookmarks and always be running the latest version.
 %files -f %{name}.lang
 %license LICENSE
 %doc README.md
+%{_sysconfdir}/apparmor.d/*
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
-%{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/applications/*.desktop
 %{_iconsdir}/hicolor/*/apps/torbrowser.png
-%{_metainfodir}/torbrowser.appdata.xml
-%{py3_puresitedir}/%{oname}-%{version}-py%{python3_version}.egg-info
-%{py3_puresitedir}/%{oname}/*
-%{_sysconfdir}/apparmor.d/*
+%{_metainfodir}/*.metainfo.xml
+%{py_puresitedir}/%{oname}-%{version}-py%{python3_version}.egg-info
+%{py_puresitedir}/%{oname}/*
+
+#----------------------------------------------------------------------
 
 %prep
 %autosetup
 
-# fix distro name
-sed -i -e 's|import platform|import distro|' \
-       -e 's|platform.dist|distro.linux_distribution|g' \
-	setup.py
-
-# fix gnupg: gpg2 binary is gpg
-sed -i "s|gpg2|gpg|g" torbrowser_launcher/common.py
-
 %build
-%py3_build
+%py_build
 
 %install
-%py3_install
-
-# appdata
-install -pm 0755 -d %{buildroot}%{_datadir}/appdata/
-install -pm 0644 share/metainfo/*.appdata.xml %{buildroot}%{_datadir}/appdata/%{name}.appdata.xml
-
-# .desktop files
-desktop-file-validate share/applications/torbrowser.desktop
-desktop-file-validate share/applications/torbrowser-settings.desktop
+%py_install
  
 # locales
 %find_lang %{name}
+
