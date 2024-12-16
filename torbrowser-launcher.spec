@@ -5,17 +5,24 @@
 Summary:	Download,update, and run the Tor Browser Bundle
 Name:		torbrowser-launcher
 Version:	0.3.7
-Release:	1
-Url:		https://www.github.com/micahflee/torbrowser-launcher
-Source0:	https://github.com/micahflee/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Release:	
 License:	MIT
 Group:		Networking/WWW
-	
+Url:		https://www.github.com/micahflee/torbrowser-launcher
+Source0:	https://github.com/micahflee/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+# (upstream) https://gitlab.torproject.org/tpo/applications/torbrowser-launcher/-/merge_requests/19?commit_id=35b3fbb27aea6b9fdbe0f245bd93c82d240af7a4
+Patch100:	https://gitlab.torproject.org/tpo/applications/torbrowser-launcher/-/merge_requests/19.patch
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	python%{pyver}dist(distro)
+BuildRequires:	python%{pyver}dist(pip)
 BuildRequires:	%{_lib}appstream-glib8
-	
+
+BuildRequires:	python%{pyver}dist(gpg)
+BuildRequires:	python%{pyver}dist(packaging)
+#BuildRequires:	python%{pyver}dist(pyside6)
+BuildRequires:	python%{pyver}dist(pysocks)
+BuildRequires:	python%{pyver}dist(requests)
 Requires:	gnupg2
 Requires:	tor
 
@@ -51,7 +58,7 @@ bookmarks and always be running the latest version.
 #----------------------------------------------------------------------
 
 %prep
-%autosetup
+%autosetup -p1
 
 %build
 %py_build

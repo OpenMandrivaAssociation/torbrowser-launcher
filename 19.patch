@@ -1,0 +1,188 @@
+From 35b3fbb27aea6b9fdbe0f245bd93c82d240af7a4 Mon Sep 17 00:00:00 2001
+From: zefr0x <zer0-x.7ty50@aleeas.com>
+Date: Thu, 2 Nov 2023 22:38:06 +0300
+Subject: [PATCH 1/2] Migrate code from PyQt5 to PySide6
+
+---
+ setup.py                        |  2 +-
+ torbrowser_launcher/__init__.py |  9 ++++-----
+ torbrowser_launcher/launcher.py | 16 ++++++++--------
+ torbrowser_launcher/settings.py |  2 +-
+ 4 files changed, 14 insertions(+), 15 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 2e09799..983018f 100644
+--- a/setup.py
++++ b/setup.py
+@@ -124,7 +124,7 @@ Browser.
+     install_requires=[
+         "gpg",
+         "packaging",
+-        "PyQt5",
++        "PySide6",
+         "requests",
+         "PySocks",
+     ],
+diff --git a/torbrowser_launcher/__init__.py b/torbrowser_launcher/__init__.py
+index 4eef7fe..3088090 100644
+--- a/torbrowser_launcher/__init__.py
++++ b/torbrowser_launcher/__init__.py
+@@ -32,7 +32,7 @@ import sys
+ import argparse
+ import signal
+ 
+-from PyQt5 import QtCore, QtWidgets
++from PySide6 import QtWidgets
+ 
+ from .common import Common, SHARE
+ from .settings import Settings
+@@ -45,7 +45,6 @@ class Application(QtWidgets.QApplication):
+     """
+ 
+     def __init__(self):
+-        self.setAttribute(QtCore.Qt.AA_X11InitThreads, True)
+         QtWidgets.QApplication.__init__(self, sys.argv)
+         self.installEventFilter(self)
+ 
+@@ -92,11 +91,11 @@ def main():
+         gui = Launcher(common, app, url_list)
+ 
+     # Center the window
+-    desktop = app.desktop()
++    screen_size = app.primaryScreen().size()
+     window_size = gui.size()
+     gui.move(
+-        (desktop.width() - window_size.width()) // 2,
+-        (desktop.height() - window_size.height()) // 2,
++        (screen_size.width() - window_size.width()) // 2,
++        (screen_size.height() - window_size.height()) // 2,
+     )
+     gui.show()
+ 
+diff --git a/torbrowser_launcher/launcher.py b/torbrowser_launcher/launcher.py
+index d339366..937d2a0 100644
+--- a/torbrowser_launcher/launcher.py
++++ b/torbrowser_launcher/launcher.py
+@@ -40,7 +40,7 @@ import shutil
+ import xml.etree.ElementTree as ET
+ from packaging import version
+ 
+-from PyQt5 import QtCore, QtWidgets, QtGui
++from PySide6 import QtCore, QtWidgets, QtGui
+ 
+ 
+ class TryStableException(Exception):
+@@ -532,9 +532,9 @@ class DownloadThread(QtCore.QThread):
+     Download a file in a separate thread.
+     """
+ 
+-    progress_update = QtCore.pyqtSignal(int, int)
+-    download_complete = QtCore.pyqtSignal()
+-    download_error = QtCore.pyqtSignal(str, str)
++    progress_update = QtCore.Signal(int, int)
++    download_complete = QtCore.Signal()
++    download_error = QtCore.Signal(str, str)
+ 
+     def __init__(self, common, url, path):
+         super(DownloadThread, self).__init__()
+@@ -615,8 +615,8 @@ class VerifyThread(QtCore.QThread):
+     Verify the signature in a separate thread
+     """
+ 
+-    success = QtCore.pyqtSignal()
+-    error = QtCore.pyqtSignal(str)
++    success = QtCore.Signal()
++    error = QtCore.Signal(str)
+ 
+     def __init__(self, common):
+         super(VerifyThread, self).__init__()
+@@ -657,8 +657,8 @@ class ExtractThread(QtCore.QThread):
+     Extract the tarball in a separate thread
+     """
+ 
+-    success = QtCore.pyqtSignal()
+-    error = QtCore.pyqtSignal()
++    success = QtCore.Signal()
++    error = QtCore.Signal()
+ 
+     def __init__(self, common):
+         super(ExtractThread, self).__init__()
+diff --git a/torbrowser_launcher/settings.py b/torbrowser_launcher/settings.py
+index adefc19..7346b54 100644
+--- a/torbrowser_launcher/settings.py
++++ b/torbrowser_launcher/settings.py
+@@ -30,7 +30,7 @@ OTHER DEALINGS IN THE SOFTWARE.
+ import subprocess
+ import shutil
+ 
+-from PyQt5 import QtCore, QtWidgets, QtGui
++from PySide6 import QtCore, QtWidgets, QtGui
+ 
+ 
+ class Settings(QtWidgets.QMainWindow):
+-- 
+GitLab
+
+
+From b0962da4f62561d82799a7fd526ce5b8bf91ce3d Mon Sep 17 00:00:00 2001
+From: BTD Master <btdmaster@disroot.org>
+Date: Fri, 1 Nov 2024 16:07:43 +0000
+Subject: [PATCH 2/2] Install PySide6 in builds and documentation
+
+---
+ BUILD.md     | 4 ++--
+ build_rpm.sh | 2 +-
+ stdeb.cfg    | 4 ++--
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/BUILD.md b/BUILD.md
+index 08b9c48..e590125 100644
+--- a/BUILD.md
++++ b/BUILD.md
+@@ -12,7 +12,7 @@ Then install dependencies, build a package, and install:
+ ### Debian, Ubuntu, Linux Mint, etc.
+ 
+ ```sh
+-sudo apt install build-essential dh-python python3-all python3-stdeb python3-pyqt5 python3-gpg python3-requests python3-socks python3-packaging gnupg2 tor
++sudo apt install build-essential dh-python python3-all python3-stdeb python3-pyside6.qtcore python3-gpg python3-requests python3-socks python3-packaging gnupg2 tor
+ ./build_deb.sh
+ sudo dpkg -i deb_dist/torbrowser-launcher_*.deb
+ ```
+@@ -20,7 +20,7 @@ sudo dpkg -i deb_dist/torbrowser-launcher_*.deb
+ ### Red Hat, Fedora, CentOS, etc.
+ 
+ ```sh
+-sudo dnf install rpm-build python3-qt5 python3-gpg python3-requests python3-pysocks python3-packaging gnupg2 tor
++sudo dnf install rpm-build python3-pyside6 python3-gpg python3-requests python3-pysocks python3-packaging gnupg2 tor
+ ./build_rpm.sh
+ sudo yum install dist/torbrowser-launcher-*.rpm
+ ```
+diff --git a/build_rpm.sh b/build_rpm.sh
+index 359614e..9e91270 100755
+--- a/build_rpm.sh
++++ b/build_rpm.sh
+@@ -6,7 +6,7 @@ VERSION=$(cat share/torbrowser-launcher/version)
+ rm -r build dist
+ 
+ # build binary package
+-python3 setup.py bdist_rpm --requires="python3-qt5, python3-gpg, python3-requests, python3-pysocks, python3-packaging, gnupg2, dbus-glib"
++python3 setup.py bdist_rpm --requires="python3-pyside6, python3-gpg, python3-requests, python3-pysocks, python3-packaging, gnupg2, dbus-glib"
+ 
+ # install it
+ echo ""
+diff --git a/stdeb.cfg b/stdeb.cfg
+index 3653de2..d78503d 100644
+--- a/stdeb.cfg
++++ b/stdeb.cfg
+@@ -1,6 +1,6 @@
+ [DEFAULT]
+ Package3: torbrowser-launcher
+-Depends3: python3-pyqt5, python3-gpg, python3-requests, python3-socks, python3-packaging, gnupg2
++Depends3: python3-pyside6.qtcore, python3-gpg, python3-requests, python3-socks, python3-packaging, gnupg2
+ Build-Depends: dh-python, python3-pyqt5, python3-gpg, python3-requests, python3-socks, python3-packaging, gnupg2
+ Recommends: tor
+-Suite: bionic
++Suite: oracular
+-- 
+GitLab
+
