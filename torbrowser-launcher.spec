@@ -4,8 +4,8 @@
 
 Summary:	Download,update, and run the Tor Browser Bundle
 Name:		torbrowser-launcher
-Version:	0.3.7
-Release:	5
+Version:	0.3.9
+Release:	1
 License:	MIT
 Group:		Networking/WWW
 Url:		https://www.github.com/micahflee/torbrowser-launcher
