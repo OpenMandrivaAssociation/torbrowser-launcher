@@ -49,11 +49,13 @@ bookmarks and always be running the latest version.
 %files -f %{name}.lang
 %license LICENSE
 %doc README.md
-%{_sysconfdir}/apparmor.d/*
+%{_sysconfdir}/apparmor.d/torbrowser*
+%{_sysconfdir}/apparmor.d/local/torbrowser*
+%{_sysconfdir}/apparmor.d/tunables/torbrowser
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/*.desktop
-%{_iconsdir}/hicolor/*/apps/torbrowser.png
+%{_iconsdir}/hicolor/*/apps/org.torproject.torbrowser-launcher.png
 %{_metainfodir}/*.metainfo.xml
 %{py_puresitedir}/%{oname}-%{version}-py%{python3_version}.egg-info
 %{py_puresitedir}/%{oname}/*
