@@ -14,6 +14,7 @@ BuildRequires:	gettext
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	python%{pyver}dist(distro)
 BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(setuptools)
 BuildRequires:	%{_lib}appstream-glib8
 
 #BuildRequires:	python%{pyver}dist(gpg)
