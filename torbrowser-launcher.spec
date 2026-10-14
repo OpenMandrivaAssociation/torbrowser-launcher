@@ -11,7 +11,7 @@ Group:		Networking/WWW
 Url:		https://www.github.com/micahflee/torbrowser-launcher
 Source0:	https://github.com/micahflee/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:	gettext
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python3)
 BuildRequires:	python%{pyver}dist(distro)
 BuildRequires:	python%{pyver}dist(pip)
 BuildRequires:	%{_lib}appstream-glib8
